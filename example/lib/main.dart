@@ -14,7 +14,11 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
+  List<TextMessage> _textMessages = [
+    TextMessage.createForRemoteUser("I'm hungry.", DateTime.now().millisecondsSinceEpoch),
+  ];
+
+  List<String> _replies = List.empty();
 
   @override
   void initState() {
@@ -27,13 +31,10 @@ class _MyAppState extends State<MyApp> {
     String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      platformVersion = await FlutterSmartReply.platformVersion;
-      final replies = await FlutterSmartReply.getSmartReplies(List<TextMessage>.empty());
+      _replies = await FlutterSmartReply.getSmartReplies(_textMessages);
 
-      debugPrint(replies.toString());
-
+      debugPrint(_replies.toString());
     } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
     }
 
     // If the widget was removed from the tree while the asynchronous platform
@@ -41,9 +42,7 @@ class _MyAppState extends State<MyApp> {
     // setState to update our non-existent appearance.
     if (!mounted) return;
 
-    setState(() {
-      _platformVersion = platformVersion;
-    });
+    setState(() { });
   }
 
   @override
@@ -51,10 +50,10 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('Smart Reply Example'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: Text('replies: ${_replies.toString()}\n'),
         ),
       ),
     );
