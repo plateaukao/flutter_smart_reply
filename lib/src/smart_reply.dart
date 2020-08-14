@@ -17,17 +17,15 @@ class TextMessage {
   int timestamp;
   bool isSelf;
 
-
   TextMessage(this.text, this.timestamp, this.isSelf);
 
-  Map<String, dynamic> toJson() =>
-      {
+  Map<String, dynamic> toJson() => {
         'text': text,
         'timestamp': timestamp,
-        'isSelf' : false,
+        'isSelf': false,
       };
 
-  TextMessage.createForLocalUser(this.text, this.timestamp) : this.isSelf= true;
+  TextMessage.createForLocalUser(this.text, this.timestamp) : this.isSelf = true;
 
   TextMessage.createForRemoteUser(this.text, this.timestamp) : this.isSelf = false;
 }
