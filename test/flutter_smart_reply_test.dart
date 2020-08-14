@@ -1,6 +1,5 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_smart_reply/flutter_smart_reply.dart';
 
 void main() {
   const MethodChannel channel = MethodChannel('flutter_smart_reply');
@@ -15,9 +14,5 @@ void main() {
 
   tearDown(() {
     channel.setMockMethodCallHandler(null);
-  });
-
-  test('getPlatformVersion', () async {
-    expect(await FlutterSmartReply.platformVersion, '42');
   });
 }
