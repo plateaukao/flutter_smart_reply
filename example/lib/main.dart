@@ -41,7 +41,8 @@ class _MyAppState extends State<MyApp> {
                   child: ListView(
                 shrinkWrap: true,
                 reverse: true,
-                children: _textMessages.reversed.map(_buildMessageItem).toList(),
+                children:
+                    _textMessages.reversed.map(_buildMessageItem).toList(),
               )),
               _buildSmartReplyRow(),
               Divider(color: Colors.blueGrey),
@@ -55,7 +56,8 @@ class _MyAppState extends State<MyApp> {
 
   Widget _buildMessageItem(TextMessage message) => Container(
         height: 70,
-        alignment: message.isSelf ? Alignment.centerRight : Alignment.centerLeft,
+        alignment:
+            message.isSelf ? Alignment.centerRight : Alignment.centerLeft,
         padding: EdgeInsets.all(5.0),
         child: Text(message.text),
       );
@@ -65,17 +67,20 @@ class _MyAppState extends State<MyApp> {
       height: 30,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: isSelfMode ? MainAxisAlignment.end : MainAxisAlignment.start,
+        mainAxisAlignment:
+            isSelfMode ? MainAxisAlignment.end : MainAxisAlignment.start,
         children: [
-          if (!isSelfMode) IconButton(
-            icon: Icon(Icons.cloud),
-            onPressed: () => setState(() => isSelfMode = !isSelfMode),
-          ),
+          if (!isSelfMode)
+            IconButton(
+              icon: Icon(Icons.cloud),
+              onPressed: () => setState(() => isSelfMode = !isSelfMode),
+            ),
           _buildSmartReplyChips(),
-          if (isSelfMode) IconButton(
-            icon: Icon(Icons.home),
-            onPressed: () => setState(() => isSelfMode = !isSelfMode),
-          ),
+          if (isSelfMode)
+            IconButton(
+              icon: Icon(Icons.home),
+              onPressed: () => setState(() => isSelfMode = !isSelfMode),
+            ),
         ],
       ),
     );
@@ -105,13 +110,17 @@ class _MyAppState extends State<MyApp> {
               child: TextField(
                 controller: myController,
                 decoration: InputDecoration.collapsed(
-                  hintText: isSelfMode ? 'send message as local side' : 'send message as remote side',
+                  hintText: isSelfMode
+                      ? 'send message as local side'
+                      : 'send message as remote side',
                 ),
                 onSubmitted: (message) => _addMessage(message),
               ),
             ),
           ),
-          IconButton(icon: Icon(Icons.send), onPressed: () => _addMessage(myController.text)),
+          IconButton(
+              icon: Icon(Icons.send),
+              onPressed: () => _addMessage(myController.text)),
         ],
       ),
     );
@@ -121,8 +130,10 @@ class _MyAppState extends State<MyApp> {
     myController.clear();
 
     _textMessages.add(isSelfMode
-        ? TextMessage.createForLocalUser(message, DateTime.now().millisecondsSinceEpoch)
-        : TextMessage.createForRemoteUser(message, DateTime.now().millisecondsSinceEpoch));
+        ? TextMessage.createForLocalUser(
+            message, DateTime.now().millisecondsSinceEpoch)
+        : TextMessage.createForRemoteUser(
+            message, DateTime.now().millisecondsSinceEpoch));
 
     await updateSmartReplies();
 
