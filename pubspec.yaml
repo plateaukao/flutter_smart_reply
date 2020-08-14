@@ -1,6 +1,6 @@
 name: flutter_smart_reply
 description: A flutter plugin to wrap Google's Machine Learning Smart Reply library.
-version: 0.0.1
+version: 0.0.2
 #author: Daniel Kao <daniel.kao at gmail.com>
 homepage: https://github.com/plateaukao/flutter_smart_reply
 
